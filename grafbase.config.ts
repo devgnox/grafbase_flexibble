@@ -8,7 +8,8 @@ const User = g.type('User', {
   avatarUrl:g.url(),
   description:g.string().optional(),
   githubUrl:g.url().optional(),
-  linkedInUrl:g.url().optional()
+  linkedInUrl:g.url().optional(),
+  project: g.ref(Project).list()
 })
 
 const Project=g.type('Project', {
@@ -19,13 +20,6 @@ const Project=g.type('Project', {
   githubUrl:g.url().optional(),
   category:scalar.string(),
   createdBy:g.ref(User)
-})
-
-g.extend(User, {
-  projects: {
-    args: { project: g.ref(Project).list() },
-    returns:g.string(),
-    resolver: 'file'}
 })
 
 export default config({
